@@ -610,7 +610,7 @@ class Consumer(object):
         def do_POST(self):
             # get the payload from an HTTP POST
             length = int(self.headers["Content-Length"])
-            data = str(self.rfile.read(length))
+            data = self.rfile.read(length).decode('utf-8')
             logdbg('POST: %s' % _obfuscate_passwords(data))
             Consumer.queue.put(data)
             self.reply()
